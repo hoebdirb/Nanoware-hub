@@ -1,0 +1,152 @@
+--// USERID WHITELIST (PUT YOUR IDS HERE LATER)
+local WhitelistedUsers = {
+    10067397246, -- example
+    10179593243, -- example
+}
+
+local LocalPlayer = game.Players.LocalPlayer
+
+--// Check if user is whitelisted
+local function IsWhitelisted()
+    for _, id in ipairs(WhitelistedUsers) do
+        if LocalPlayer.UserId == id then
+            return true
+        end
+    end
+    return false
+end
+
+--// Load WindUI with error handling
+local WindUI = nil
+local success, result = pcall(function()
+    local source = game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua")
+    return loadstring(source)()
+end)
+
+if success then
+    WindUI = result
+else
+    warn("Failed to load WindUI: ", result)
+end
+
+--// Proceed only if WindUI loaded successfully
+if not WindUI then
+    warn("WindUI not loaded, stopping script.")
+    return
+end
+
+--// Window settings
+local WindowConfig = {
+    Title = "nanoware development",
+    Author = "by ",
+    Folder = "nanoware development",
+
+    Size = UDim2.fromOffset(580, 460),
+    MinSize = Vector2.new(560, 350),
+    MaxSize = Vector2.new(850, 560),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
+
+    User = {
+        Enabled = true,
+        Anonymous = false,
+        Callback = function()
+            -- your callback code here
+        end,
+    },
+}
+
+--// ONLY ADD KEY SYSTEM IF USER IS NOT WHITELISTED
+if not IsWhitelisted() then
+    WindowConfig.KeySystem = {
+        Key = { "Free_Jos93noBiB8B6B9F59266ehIf9wBo72b" }, -- change later
+        Note = "Enter the correct key to continue.",
+        URL = "https://link-hub.net/1444316/5XUHETWLjLR1",
+        SaveKey = true,
+    }
+end
+
+--// Create Window
+local Window = WindUI:CreateWindow(WindowConfig)
+
+--tabs
+local Tab1 = Window:Tab({ Title = "build stealer", Locked = false, })
+local Tab2 = Window:Tab({ Title = "auto buy", Locked = false, })
+local Tab3 = Window:Tab({ Title = "auto farm", Locked = false, })
+local Tab4 = Window:Tab({ Title = "settings", Locked = false, })
+local Tab5 = Window:Tab({ Title = "misc", Locked = false, })
+
+--tab1
+--plot select
+local Dropdown = Tab:Dropdown({
+    Title = "Advanced Dropdown",
+    Desc = "Dropdown Description",
+    Values = {
+        {
+            Title = "Black",
+        },
+        {
+            Title = "Blue",
+        },
+        {
+            Title = "Green",
+        },
+        {
+            Title = "Pink"
+        },
+        {
+            Title = "Red"
+        },
+        {
+            Title = "White"
+        },
+        {
+            Title = "Yellow"
+        },
+    },
+    Value = "Black",
+    Callback = function(option) 
+        print("Category selected: " .. option.Title .. " with icon " .. option.Icon) 
+    end
+})
+--load stolen build
+local Button = Tab1:Button({
+    Title = "steal build"
+    Desc = "load the build you want to steal",
+    Locked = false,
+    Callback = function()
+        -- ...
+    end
+})
+
+--tab2
+local Dropdown = Tab2:Dropdown({
+    Title = "Advanced Dropdown",
+    Desc = "Dropdown Description",
+    Values = {
+        {
+            Title = "Category A",
+        },
+        {
+            Title = "Category B",
+        },
+        {
+            Title = "Category C",
+        },
+    },
+    Value = "Category A",
+    Callback = function(option) 
+        print("Category selected: " .. option.Title .. " with icon " .. option.Icon) 
+    end
+})
+
+--tab3
+
+--tab4
+
+--tab5
